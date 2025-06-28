@@ -7,7 +7,7 @@ Un bot avanzado de Telegram para seguimiento de criptomonedas, gestión de carte
 ## 🚀 Funcionalidades principales
 
 - 📊 **/estado**: Muestra los precios actuales de todas las criptomonedas en cartera y seguimiento.
-- 🧠 **/analiza**: Analiza todos los tokens según tu nivel de riesgo y muestra señales con SL, TP y probabilidad.
+- 🧐 **/analiza**: Analiza todos los tokens según tu nivel de riesgo y muestra señales con SL, TP y probabilidad.
 - 📉 **/set_riesgo TOKEN nivel**: Cambia el riesgo asociado a cada token (conservador, moderado, agresivo).
 - 💼 **/resumen**: Resumen total de tu cartera con valor actual.
 - 📰 **/noticias**: Acceso a noticias relevantes del mercado (en desarrollo).
@@ -23,6 +23,7 @@ fevalalertsbot/
 ├── main.py               # Código principal del bot
 ├── utils.py              # Funciones de soporte (precios, análisis, resumen)
 ├── alerts.py             # Sistema de alertas técnicas automáticas
+├── server.py             # Servidor Flask para mantener el bot activo en Render
 ├── requirements.txt      # Dependencias
 └── .env                  # Variables de entorno (no subir)
 ```
@@ -43,12 +44,13 @@ Estas variables deben configurarse en **Render** dentro de la sección Environme
 ## 🧪 Instrucciones para desplegar en Render
 
 1. Crea una cuenta en [https://render.com](https://render.com) con GitHub.
-2. Crea un nuevo **Web Service**.
+2. Crea un nuevo **Web Service** gratuito.
 3. Configura:
+   - **Runtime**: Python
    - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `python main.py`
-   - **Environment**: Python 3, tipo: *Background Worker*
-4. Añade las variables de entorno.
+   - **Start Command**: `python server.py`
+   - **Root Directory**: `/`
+4. En "Environment", pon tus variables `BOT_TOKEN` y `USER_ID`
 5. Render lo desplegará automáticamente.
 
 ---
@@ -59,8 +61,6 @@ Actualmente integrados:
 - Cartera: `SOLX`, `TICS`
 - Seguimiento: `BTC`, `FIL`, `TON`, `TRX`, `FET`, `TAO`
 
-Próximamente se añadirá más soporte con botones dinámicos y expansión de tokens.
-
 ---
 
 ## 🧠 Objetivos
@@ -68,6 +68,7 @@ Próximamente se añadirá más soporte con botones dinámicos y expansión de t
 - Convertir este bot en una herramienta tipo "Forex Algo".
 - Recomendaciones inteligentes con indicadores técnicos.
 - Integración con Uniswap y APIs oficiales para precios exactos.
+- Interfaz con botones, comandos intuitivos y alertas interactivas.
 
 ---
 
