@@ -1,96 +1,76 @@
-# 🤖 Feval Alerts Bot
+# Feval Alerts Bot
 
-FevalAlertsBot es un bot personalizado de Telegram que actúa como **asesor de trading en criptomonedas**, diseñado para ofrecer:
-
-- 📈 Seguimiento en tiempo real de tu cartera.
-- 🔔 Alertas automáticas de precio configurables.
-- 📊 Análisis técnico adaptado a tu perfil de riesgo.
-- 🗞️ Informes automáticos e integración futura de noticias.
-- 📲 Interfaz intuitiva con botones interactivos.
-- ☑️ Comandos fáciles y rápidos para tener el control total.
+Un bot avanzado de Telegram para seguimiento de criptomonedas, gestión de cartera y alertas automáticas personalizadas. Desarrollado para el usuario `feval8`, permite supervisar tanto tokens en cartera como en seguimiento, enviar informes periódicos y usar botones interactivos para una experiencia más intuitiva.
 
 ---
 
-## 🚀 ¿Qué puede hacer este bot?
+## 🚀 Funcionalidades principales
 
-### 🔧 Comandos principales
-
-| Comando        | Descripción |
-|----------------|-------------|
-| `/start`       | Muestra el menú con botones interactivos. |
-| `/estado`      | Muestra el precio actual de todos los tokens. |
-| `/resumen`     | Muestra el resumen completo y valor total de tu cartera. |
-| `/analiza`     | Muestra análisis técnico individual de cada token con sugerencias. |
-| `/set_riesgo`  | Cambia tu perfil de riesgo por token (`conservador`, `moderado`, `agresivo`). |
-| `/noticias`    | Recibirá noticias relevantes (implementación en desarrollo). |
+- 📊 **/estado**: Muestra los precios actuales de todas las criptomonedas en cartera y seguimiento.
+- 🧠 **/analiza**: Analiza todos los tokens según tu nivel de riesgo y muestra señales con SL, TP y probabilidad.
+- 📉 **/set_riesgo TOKEN nivel**: Cambia el riesgo asociado a cada token (conservador, moderado, agresivo).
+- 💼 **/resumen**: Resumen total de tu cartera con valor actual.
+- 📰 **/noticias**: Acceso a noticias relevantes del mercado (en desarrollo).
+- ⏱️ **Informe automático cada hora**: Precios + resumen de cartera.
+- 🔔 **Alertas automáticas**: Se envían cuando se detectan condiciones técnicas (breakout, RSI, volumen, etc.)
 
 ---
 
-## 🛠️ Tecnologías usadas
+## 📦 Estructura del proyecto
 
-- [Python](https://www.python.org/)
-- [python-telegram-bot](https://docs.python-telegram-bot.org/)
-- [httpx](https://www.python-httpx.org/)
-- [APScheduler](https://apscheduler.readthedocs.io/)
-- CoinGecko API (para precios en tiempo real)
-- Uniswap + scraping (para tokens especiales como SOLX y TICS)
-
----
-
-## 🧪 Alertas automáticas y análisis
-
-El bot detecta:
-
-- 🔺 Subidas por encima del umbral establecido.
-- 🔻 Caídas por debajo del nivel crítico.
-- 🧠 Recomendaciones de entrada/salida, SL y TP en base a indicadores como RSI, soportes y volumen (implementado parcialmente).
-- 🕐 Envío automático de informe horario cada 60 minutos.
-- 🔁 Revisión cada 5 minutos de todos los precios monitoreados.
+```bash
+fevalalertsbot/
+├── main.py               # Código principal del bot
+├── utils.py              # Funciones de soporte (precios, análisis, resumen)
+├── alerts.py             # Sistema de alertas técnicas automáticas
+├── requirements.txt      # Dependencias
+└── .env                  # Variables de entorno (no subir)
+```
 
 ---
 
-## ⚙️ Instalación en Railway
+## ⚙️ Variables de entorno (.env)
 
-1. Crea una cuenta en [Railway](https://railway.app)
-2. Conecta este repositorio desde GitHub.
-3. En la pestaña `Variables`, añade:
-    - `BOT_TOKEN`: Tu token de Telegram Bot
-    - `USER_ID`: Tu ID personal de Telegram (número)
-4. Espera a que el proyecto se despliegue y... ¡listo! 🎉
+```env
+BOT_TOKEN=tu_token_aqui
+USER_ID=tu_telegram_id
+```
 
----
-
-## 🧠 A tener en cuenta
-
-- **Tokens monitorizados por defecto**: SOLX, TICS, BTC, FIL, TON, TRX, FET, TAO
-- Puedes modificar los tokens directamente en `main.py`, `utils.py` y `alerts.py` si deseas personalizar tu cartera o seguir nuevos proyectos.
-- El bot está pensado para ser un *asistente de trading de alta utilidad para inversores activos*.
+Estas variables deben configurarse en **Render** dentro de la sección Environment.
 
 ---
 
-## 📍 Autor
+## 🧪 Instrucciones para desplegar en Render
 
-Este proyecto ha sido creado junto con [ChatGPT] como asesor financiero personal de [@feval8](https://github.com/feval8) para gestión avanzada de inversiones en criptomonedas. 🚀
-
----
-
-## 🛡️ Advertencia
-
-> Este bot no realiza operaciones ni gestiona fondos. Las recomendaciones son basadas en lógica de análisis técnico, pero **no constituyen asesoramiento financiero real**.
-
----
-
-## 🧩 En desarrollo
-
-- 🔄 Mejora de scraping y precios para SOLX/TICS.
-- 📥 Sistema de gestión de alertas personalizables por comando.
-- 📰 Noticias cripto automáticas.
-- 📊 Gráficas y análisis visual.
-- ⚡ Panel web o escritorio futuro para mejor interacción.
+1. Crea una cuenta en [https://render.com](https://render.com) con GitHub.
+2. Crea un nuevo **Web Service**.
+3. Configura:
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `python main.py`
+   - **Environment**: Python 3, tipo: *Background Worker*
+4. Añade las variables de entorno.
+5. Render lo desplegará automáticamente.
 
 ---
 
-## ✅ ¡Listo para usar!
+## 📌 Tokens soportados
 
-Una vez desplegado, simplemente inicia conversación con tu bot en Telegram, escribe `/start`, y comienza a recibir información, alertas y recomendaciones.
+Actualmente integrados:
+- Cartera: `SOLX`, `TICS`
+- Seguimiento: `BTC`, `FIL`, `TON`, `TRX`, `FET`, `TAO`
+
+Próximamente se añadirá más soporte con botones dinámicos y expansión de tokens.
+
+---
+
+## 🧠 Objetivos
+
+- Convertir este bot en una herramienta tipo "Forex Algo".
+- Recomendaciones inteligentes con indicadores técnicos.
+- Integración con Uniswap y APIs oficiales para precios exactos.
+
+---
+
+**Desarrollado junto a ChatGPT como asesor e ingeniero de automatización.**
+
 
